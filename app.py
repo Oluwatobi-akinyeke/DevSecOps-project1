@@ -12,7 +12,7 @@ def get_user_data(user_id):
     connection = sqlite3.connect('example.db')
     cursor = connection.cursor()
     # Vulnerable to SQL Injection
-    query = f”SELECT * FROM users WHERE id = ‘{user_id}’”
+    query = f"SELECT * FROM users WHERE id = '{user_id}'" 
     cursor.execute(query)
     return cursor.fetchall()
 # 2. **Broken Authentication**
@@ -96,14 +96,14 @@ if __name__ == ‘__main__‘:
     # Example: SQL Injection Exploitation
     get_user_data(“1’ OR ‘1’=‘1”)
     # Example: XML External Entities (XXE) Exploitation
-    xml_data = ‘’'<?xml version=“1.0"?>
+    xml_data = '''<?xml version=“1.0"?>
     <!DOCTYPE root [
     <!ENTITY xxe SYSTEM “file:///etc/passwd”>
     ]>
     <user>
         <name>&xxe;</name>
     </user>
-    ‘’'
+    '''
     parse_xml(xml_data)
     # Example: Insecure Deserialization Exploitation
     payload = b’cos\nsystem\n(S”rm -rf /“\ntR.'  # Dangerous payload
